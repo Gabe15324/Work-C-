@@ -10,5 +10,6 @@ public class BancoDeeDados : DbContext
     public DbSet<Cliente> Clientes { get; set; }
     public DbSet<Games> Games { get; set; }
     public DbSet<Venda> Vendas { get; set; }
-    public DbSet<Compra> Compras { get; set; }
+    public DbSet<Compra> Compras { get; set; } 
+    
 }
