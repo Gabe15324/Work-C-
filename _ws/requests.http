@@ -1,0 +1,12 @@
+### Requisição POST
+
+POST http://localhost:5096/clientes
+Content-Type: application/json
+
+{
+"Nome" : "Flávio",
+"CPF" : "12345",
+"Telefone" : "99999999",
+"Email" : "flavindopneu@email.com"
+}
+
