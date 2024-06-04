@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LojaGamerApi.Migrations
 {
     [DbContext(typeof(BancoDeDados))]
-    [Migration("20240502230500_8.0.4")]
-    partial class _804
+    [Migration("20240604154011_VersaoAlterada04062024")]
+    partial class VersaoAlterada04062024
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,6 +41,21 @@ namespace LojaGamerApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cliente");
+                });
+
+            modelBuilder.Entity("ClienteCompra", b =>
+                {
+                    b.Property<int>("clientesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("comprasId")
+                        .HasColumnType("int");
+
+                    b.HasKey("clientesId", "comprasId");
+
+                    b.HasIndex("comprasId");
+
+                    b.ToTable("ClienteCompra");
                 });
 
             modelBuilder.Entity("Compra", b =>
@@ -77,6 +92,21 @@ namespace LojaGamerApi.Migrations
                     b.ToTable("Games");
                 });
 
+            modelBuilder.Entity("GamesVenda", b =>
+                {
+                    b.Property<int>("gamesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("vendasId")
+                        .HasColumnType("int");
+
+                    b.HasKey("gamesId", "vendasId");
+
+                    b.HasIndex("vendasId");
+
+                    b.ToTable("GamesVenda");
+                });
+
             modelBuilder.Entity("Venda", b =>
                 {
                     b.Property<int>("Id")
@@ -95,6 +125,36 @@ namespace LojaGamerApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Venda");
+                });
+
+            modelBuilder.Entity("ClienteCompra", b =>
+                {
+                    b.HasOne("Cliente", null)
+                        .WithMany()
+                        .HasForeignKey("clientesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Compra", null)
+                        .WithMany()
+                        .HasForeignKey("comprasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GamesVenda", b =>
+                {
+                    b.HasOne("Games", null)
+                        .WithMany()
+                        .HasForeignKey("gamesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Venda", null)
+                        .WithMany()
+                        .HasForeignKey("vendasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
