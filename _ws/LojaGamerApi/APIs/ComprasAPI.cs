@@ -2,10 +2,10 @@ using Microsoft.EntityFrameworkCore;
 
 public static class ComprasAPI
 {
-    public static void MapClienteAPI(this WebApplication app)
+    public static void MapComprasAPI(this WebApplication app)
 
     {
-        var group = app.MapGroup("/Clientes");
+        var group = app.MapGroup("/compras");
 
         group.MapGet("/", async (BancoDeDados db) =>
         {
@@ -38,7 +38,7 @@ public static class ComprasAPI
                     Console.WriteLine($"cliente: {cliente}");
                     if (cliente.Id > 0)
                     {
-                        var eExistente = await db.Cliente.FindAsync(compra.Id);
+                        var eExistente = await db.Cliente.FindAsync(cliente.Id);
                         if (eExistente is not null)
                         {
                             clientes.Add(eExistente);

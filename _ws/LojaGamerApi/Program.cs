@@ -24,5 +24,8 @@ app.UseSwaggerUI();
 app.MapGet("/", () => "Loja de Games com EF + Swagger");
 
 app.MapClienteAPI();
+app.MapComprasAPI();
+app.MapVendasAPI();
+app.MapGamesAPI();
 
 app.Run();
